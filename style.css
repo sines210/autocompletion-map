@@ -1,0 +1,68 @@
+body
+{font-size: 10px;}
+
+main
+{height: 100vh;
+    width: 100%;
+    display: flex;
+justify-content: center;
+align-items: center;} 
+
+
+#searchLabel
+{font-size: 1.6rem;}
+
+#search
+{width: 40vw;}
+
+#searchList
+{list-style: none;
+display: flex;
+flex-direction: column;
+}
+
+#searchList button
+{height: 5vh;
+background-color:#ede7d5;
+text-align: left;
+border: none;
+font-size: 1.2rem;}
+
+#searchList button:hover
+{
+background-color: grey;}
+
+i
+{margin-right: 5%;}
+
+.cityList
+{border: none;}
+
+
+#mapid { height: 45vh; }
+
+#closeMap
+{
+    font-size: 2rem;
+}
+
+
+/* LISTE */
+
+
+
+
+.tryClik
+{border: 0.3px gray solid;
+font-size: 1.4rem;} 
+
+.tryClik:hover
+{background-color: #ede7d5;
+}
+
+
+@media screen and (max-width:1024px)
+{
+    #search
+{width: 25vw;}
+}

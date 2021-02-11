@@ -7,24 +7,30 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
     integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
     crossorigin=""/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <main>
-         <div id="searchBlock">
-                 <label for="search" id="searchLabel">Where:</label> <input type="search" id='search' class="form-control"  />
+        <div class="s-bloc"><label for="search" id="searchLabel">Where:</label> <input type="search" id='search' class="form-control"  /></div>
+        <div class="s-bloc"><div id="searchList"></div> </div>
+           <div id="blocTemp"> <div id="temperature"></div></div>
 
-                 <div id="searchList"></div> 
-                 <div id="mapBox">   <div id="mapid"></div>
-                 <button id="closeMap">&#735;</button></div>
-              
-         </div>
+        <div id="chart_map_bloc">
+            <div id="mapBox">   
+                <div id="mapid"></div>
+                <button id="closeMap">&#735;</button></div>
 
-     
+             <canvas id="myChart"></canvas>
+        </div>
+ 
     </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
     integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
     crossorigin=""></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
     <script src="https://kit.fontawesome.com/6c17918ad5.js" crossorigin="anonymous"></script>
     <script src="app.js"></script>
 </body>

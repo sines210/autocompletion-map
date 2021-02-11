@@ -1,13 +1,25 @@
 body
-{font-size: 10px;}
+{font-size: 10px;
+font-family: 'Roboto', sans-serif;}
 
 main
 {height: 100vh;
     width: 100%;
-    display: flex;
-justify-content: center;
-align-items: center;} 
+background: 100% 100% url('https://img1.freepng.fr/20180305/kyw/kisspng-grey-pattern-continental-light-gray-background-shading-5a9cfd9b492b56.8040340215202379792997.jpg');
+z-index: 3;
+} 
 
+#blocTemp
+{width: 100%;
+    display: grid;
+place-items: center;}
+
+#temperature
+{font-size: 2.4rem;}
+
+.s-bloc
+{display: flex;
+justify-content: center;}
 
 #searchLabel
 {font-size: 1.6rem;}
@@ -19,6 +31,7 @@ align-items: center;}
 {list-style: none;
 display: flex;
 flex-direction: column;
+width: 40vw;
 }
 
 #searchList button
@@ -35,16 +48,29 @@ background-color: grey;}
 i
 {margin-right: 5%;}
 
+.coordinates
+{display: none;}
+
 .cityList
 {border: none;}
 
 
-#mapid { height: 45vh; }
+#chart_map_bloc
+{display: flex;}
+
+#mapid
+{margin-top: 5%;
+     height: 45vh;
+width: 40vw; }
 
 #closeMap
-{
-    font-size: 2rem;
-}
+{font-size: 2rem;}
+
+#myChart
+{height: 45vh;
+width: 40vw;
+z-index: 6;}
+
 
 
 /* LISTE */

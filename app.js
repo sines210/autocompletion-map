@@ -14,22 +14,26 @@ var main = document.querySelector('main');
 var ctx = document.querySelector('#myChart');
 
 
-//initialisation d'un bouléen qui pourrait servir par la suite et dissimulation du bouton close de la carte 
-var isActive = false;
+// dissimulation du bouton close de la carte 
 closeMap.style.display='none'
 
 
 
 
-var getDataCompletion = () => {
+var getDataCompletion = (parameters) => {
     var url = 'https://places-dsn.algolia.net/1/places/query';
     fetch(url, {
         method : 'POST',
-        body:JSON.stringify({"query":`${searchBar.value}`, "type":'city',  'language':'fr', 'hitsPerPage':'10'})
+        body:JSON.stringify({query: parameters, "type":'city',  'language':'fr', 'hitsPerPage':'8'})
+
+        
     })
     .then(response=>response.json())  
     .then((data)=>{ 
-        console.log(data)
+
+        //clear la liste des villes avant l'éxécution (et rééxécution du code) permet de ne pas avoir les résultats qui s'accumulent à chaque lettre tapée
+        searchList.innerHTML='';
+
         data.hits.forEach(element => {
  
              cityListing = element.locale_names
@@ -54,11 +58,8 @@ var getDataCompletion = () => {
 })
 }
 
-    // var clearMap = () =>{
-    //     // map.remove();
-    // }  
 
-//la map peut être custom de multiple maniere il faut aller voir l'API pour lui rajouter des fonctionnalités
+
 var getMap = (el) => {
 
     var token ='https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2luZXMyMTAiLCJhIjoiY2trc3AwOGVqMHE2MzJwcGM1MWN5eXp1YiJ9.PwluY1DxHPpffk2eql7-pg'
@@ -91,14 +92,15 @@ var getMap = (el) => {
 }
 
 
-var getChart = (parameters)=>{
+var getChart = (temp, date)=>{
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
             labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5'],
+        //    labels: date,
             datasets: [{
                 label: '5 days temperatures',
-                data: parameters, 
+                data: temp, 
                 backgroundColor: [
                     'blue',
                     'yellow',
@@ -137,6 +139,7 @@ var getChart = (parameters)=>{
 
 var currentMeteo = (parameters) =>{
   var url =  `http://api.openweathermap.org/data/2.5/forecast?q=${parameters}&units=metric&lang=fr&appid=9d785e4be242978d5c675be91bd50019` 
+//icons : //   var urlImg= 'http://openweathermap.org/img/wn/10d@2x.png'
     
     fetch(url)
     .then(response=>response.json())
@@ -144,8 +147,10 @@ var currentMeteo = (parameters) =>{
         cl(data)
             var getTemper = data.list[0].main.temp
             temperature.innerHTML= Math.round(getTemper)+"°"
+            // cl(data.list[0].weather[0].icon)
 
             var forecast = [data.list[0].main.temp, data.list[8].main.temp, data.list[16].main.temp, data.list[24].main.temp, data.list[32].main.temp ]
+            // var dateForecast = 
             var coordinates = data.city.coord
 
             getMap(coordinates)
@@ -153,17 +158,17 @@ var currentMeteo = (parameters) =>{
 
 
             if(getTemper<=-15)
-            {main.style.background='#bad6d0'}
+            {document.body.style.background='#bad6d0'}
             else if (getTemper<0 && getTemper>-15)
-            {main.style.background='#81c7b9'}
+            {document.body.style.background='#81c7b9'}
             else if (getTemper<10 && getTemper>=0  )
-            {main.style.background='#89e3e8'}
+            {document.body.style.background='#89e3e8'}
             else if (getTemper<20 && getTemper>=10 )
-            {main.style.background='#74e8a8'}
+            {document.body.style.background='#74e8a8'}
             else if (getTemper<30 && getTemper>=20)
-            {main.style.background='#e8ac46'}
+            {document.body.style.background='#e8ac46'}
             else if (getTemper>=30)
-            {main.style.background='#db663b'}
+            {document.body.style.background='#db663b'}
 
         //voir pour mettre des img en bg
     })
@@ -173,9 +178,12 @@ var currentMeteo = (parameters) =>{
 
 //event autocomplétion
 searchBar.addEventListener('keyup', (event)=>{
-    getDataCompletion();
-    currentMeteo()
-
+    if(!searchBar.value){
+        event.preventDefault();
+        searchList.innerHTML=""; 
+    }
+    else{  getDataCompletion(searchBar.value);
+        currentMeteo()}
 })
 
 
@@ -196,8 +204,6 @@ closeMap.addEventListener('DOMActivate', (event)=>{
 
 
 //TODO
-
-//afficher la carte par défaut plus graphique par défaut une fois que le pb de la carte ser réglé
 
 
 //ce qui pourrait etre intéressant c'est de rajouter la carte à l'appli météo et que au clic sur une ville on accède aux données météo sinon ya pas d'intérêt à rajouter une carte

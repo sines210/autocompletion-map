@@ -41,7 +41,6 @@ var getDataCompletion = (parameters) => {
              
              resultToClick = document.querySelectorAll('.clickResult');
            
-                // getTime()
 
             resultToClick.forEach(element => {
                 //le domctivate event te permet d'activer les liens à la navigation clavier au clic et à l'entrée
@@ -80,7 +79,6 @@ var getMap = (el) => {
         zoomOffset: -1,
         watch: true,
         setView: true,
-        // dragging : true,
         accessToken: 'pk.eyJ1Ijoic2luZXMyMTAiLCJhIjoiY2trc3AwOGVqMHE2MzJwcGM1MWN5eXp1YiJ9.PwluY1DxHPpffk2eql7-pg'
        
     }).addTo(mymap);
@@ -149,7 +147,6 @@ var currentMeteo = (parameters) =>{
         temperature.innerHTML= Math.round(getTemper)+"°"
         // cl(data.list[0].weather[0].icon)
    
-      //  cl(data.list[0].dt_txt) //time indice 0 //lui appliquer un gethours et le comparer avec newdate gethours pour chgt jour
 
         var forecast = [data.list[0].main.temp, data.list[8].main.temp, data.list[16].main.temp, data.list[24].main.temp, data.list[32].main.temp ]
        
@@ -162,18 +159,13 @@ var currentMeteo = (parameters) =>{
        var dateForecast = (param) =>
        {  data.list.forEach(element => {
         param = element.dt_txt;
-        daysArray.push(param);
-    });}
+        if(param.endsWith('12:00:00'))
+        {daysArray.push(param);}
+        });}
         dateForecast();  
 
-
-        //if(param.endsWith('12:00:00'))
-
-        var daysChart = [daysArray[0], daysArray[8], daysArray[16], daysArray[24], daysArray[32]]
+        var daysChart = daysArray
      
-
-
-            //vérifier à 15h si ca bouge pas (ca devrait bouger)
           
 
             getMap(coordinates)
@@ -193,20 +185,10 @@ var currentMeteo = (parameters) =>{
             {document.body.style.background='#e8ac46'}
             else if (getTemper>=30)
             {document.body.style.background='#db663b'}
-
-        //voir pour mettre des img en bg
-    })
+            })
 }
 
-// getTime = (parameters) =>{
-//        var getDate = new Date();
-//     var dateHour = getDate.getHours();
 
-//     // cl(dateHour)
-
-     
-
-// }
 
 
 //event autocomplétion

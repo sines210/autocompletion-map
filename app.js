@@ -80,6 +80,7 @@ var getMap = (el) => {
         zoomOffset: -1,
         watch: true,
         setView: true,
+        // dragging : true,
         accessToken: 'pk.eyJ1Ijoic2luZXMyMTAiLCJhIjoiY2trc3AwOGVqMHE2MzJwcGM1MWN5eXp1YiJ9.PwluY1DxHPpffk2eql7-pg'
        
     }).addTo(mymap);
@@ -137,7 +138,7 @@ var getChart = (temp, date)=>{
     }
 
 var currentMeteo = (parameters) =>{
-  var url =  `http://api.openweathermap.org/data/2.5/forecast?q=${parameters}&units=metric&lang=fr&appid=9d785e4be242978d5c675be91bd50019` 
+  var url =  `https://api.openweathermap.org/data/2.5/forecast?q=${parameters}&units=metric&lang=fr&appid=9d785e4be242978d5c675be91bd50019` 
 //icons : //   var urlImg= 'http://openweathermap.org/img/wn/10d@2x.png'
     
     fetch(url)
@@ -155,14 +156,23 @@ var currentMeteo = (parameters) =>{
         var coordinates = data.city.coord
 
 
-       var daysArray =[]
+       var daysArray =[];
+
+
        var dateForecast = (param) =>
        {  data.list.forEach(element => {
-        param = element.dt_txt
-        daysArray.push(param) });}
+        param = element.dt_txt;
+        daysArray.push(param);
+    });}
         dateForecast();  
 
+
+        //if(param.endsWith('12:00:00'))
+
         var daysChart = [daysArray[0], daysArray[8], daysArray[16], daysArray[24], daysArray[32]]
+     
+
+
             //vérifier à 15h si ca bouge pas (ca devrait bouger)
           
 

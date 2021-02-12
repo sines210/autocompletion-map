@@ -41,7 +41,7 @@ var getDataCompletion = (parameters) => {
              
              resultToClick = document.querySelectorAll('.clickResult');
            
-
+                // getTime()
 
             resultToClick.forEach(element => {
                 //le domctivate event te permet d'activer les liens à la navigation clavier au clic et à l'entrée
@@ -96,8 +96,7 @@ var getChart = (temp, date)=>{
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5'],
-        //    labels: date,
+           labels: date,
             datasets: [{
                 label: '5 days temperatures',
                 data: temp, 
@@ -144,17 +143,32 @@ var currentMeteo = (parameters) =>{
     fetch(url)
     .then(response=>response.json())
     .then((data)=>{
-        cl(data)
-            var getTemper = data.list[0].main.temp
-            temperature.innerHTML= Math.round(getTemper)+"°"
-            // cl(data.list[0].weather[0].icon)
 
-            var forecast = [data.list[0].main.temp, data.list[8].main.temp, data.list[16].main.temp, data.list[24].main.temp, data.list[32].main.temp ]
-            // var dateForecast = 
-            var coordinates = data.city.coord
+        var getTemper = data.list[0].main.temp
+        temperature.innerHTML= Math.round(getTemper)+"°"
+        // cl(data.list[0].weather[0].icon)
+   
+      //  cl(data.list[0].dt_txt) //time indice 0 //lui appliquer un gethours et le comparer avec newdate gethours pour chgt jour
+
+        var forecast = [data.list[0].main.temp, data.list[8].main.temp, data.list[16].main.temp, data.list[24].main.temp, data.list[32].main.temp ]
+       
+        var coordinates = data.city.coord
+
+
+       var daysArray =[]
+       var dateForecast = (param) =>
+       {  data.list.forEach(element => {
+        param = element.dt_txt
+        daysArray.push(param) });}
+        dateForecast();  
+
+        var daysChart = [daysArray[0], daysArray[8], daysArray[16], daysArray[24], daysArray[32]]
+            //vérifier à 15h si ca bouge pas (ca devrait bouger)
+          
 
             getMap(coordinates)
-            getChart(forecast)
+            getChart(forecast, daysChart)
+
 
 
             if(getTemper<=-15)
@@ -174,6 +188,15 @@ var currentMeteo = (parameters) =>{
     })
 }
 
+// getTime = (parameters) =>{
+//        var getDate = new Date();
+//     var dateHour = getDate.getHours();
+
+//     // cl(dateHour)
+
+     
+
+// }
 
 
 //event autocomplétion

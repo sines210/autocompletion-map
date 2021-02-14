@@ -166,9 +166,22 @@ var currentMeteo = (parameters) =>{
         });}
         dateForecast();  
 
-        var daysChart = daysArray
-     
-          
+       
+        var daySet = []
+
+        var setDate = (param) =>{
+            daysArray.forEach(element => {
+                var a = element.slice(0,4);
+                var b = element.slice(5,7);
+                var c = element.slice(8,10);
+                var d = element.slice(11,19)
+                element = `${c}-${b}-${a} ${d}` ;
+                daySet.push(element)
+            });
+        }
+          setDate()
+
+            var daysChart = daySet
 
             getMap(coordinates)
             getChart(forecast, daysChart)

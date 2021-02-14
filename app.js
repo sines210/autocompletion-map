@@ -35,18 +35,18 @@ closeMap.style.display='none'
 //   setClock()
 
 // clockDiv.insertAdjacentHTML('afterbegin', `<li id=clockIcon>&#128336;</li><li>${clock}</li>`)
-var updateTime= () => {
+
+
+function updateTime(parameters){
     var currentTime = new Date()
     var a = currentTime.getHours()
     var b = currentTime.getMinutes()
     if (b < 10){
-       b = "0" + minutes
+        b = "0" + b
     }
-    var c = `${a}:${b}`;
-  
-    clockDiv.innerHTML = "&#128336;"+c;
+    parameters = `${a}:${b}`;
 
-// clockDiv.insertAdjacentHTML('afterbegin', `<li id=clockIcon>&#128336;</li><li>${clock}</li>`)
+    clockDiv.innerHTML = "&#128336;"+parameters;
 }
 setInterval(updateTime, 1000);
 

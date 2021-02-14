@@ -85,6 +85,28 @@ font-size: 1.4rem;}
 
 @media screen and (max-width:1024px)
 {
+    main 
+    {height: 200vh;}
     #search
 {width: 25vw;}
+
+#chart_map_bloc
+{display: grid;
+    height: 150vh;
+    width: 100vw;
+grid-template-columns: 1fr;
+grid-template-rows: 1fr 1fr ;}
+canvas
+{width: 100%;}
+#myChart
+{   height: 45vh;
+    width: 95vw;
+}
+
+#mapid
+{
+     height: 45vh;
+width: 95vw; }
+
+
 }

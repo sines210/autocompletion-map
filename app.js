@@ -122,6 +122,8 @@ var getChart = (temp, date)=>{
                     }
                 }]
             },
+     
+
             layout: {
                 padding: {
                     left: 20,

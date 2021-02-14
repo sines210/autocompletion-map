@@ -12,14 +12,27 @@ var closeMap = document.querySelector('#closeMap')
 var temperature = document.querySelector('#temperature');
 var main = document.querySelector('main');
 var ctx = document.querySelector('#myChart');
-
+var clockDiv = document.querySelector('#clockContain');
 
 // dissimulation du bouton close de la carte 
 closeMap.style.display='none'
 
 
 
+//Set a clock
+var newDat = new Date();
+var clock ='';
+var setClock = (param) =>{
+   var a=  newDat.getHours();
+   var b = newDat.getMinutes();
+   var c = `${a}:${b}`;
+   clock = c
+}
+  setClock()
+clockDiv.insertAdjacentHTML('afterbegin', `<li id=clockIcon>&#128336;</li><li>${clock}</li>`)
 
+
+//data completion
 var getDataCompletion = (parameters) => {
     var url = 'https://places-dsn.algolia.net/1/places/query';
     fetch(url, {
@@ -59,6 +72,8 @@ var getDataCompletion = (parameters) => {
 
 
 
+
+//map
 var getMap = (el) => {
 
     var token ='https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2luZXMyMTAiLCJhIjoiY2trc3AwOGVqMHE2MzJwcGM1MWN5eXp1YiJ9.PwluY1DxHPpffk2eql7-pg'
@@ -91,6 +106,8 @@ var getMap = (el) => {
 }
 
 
+
+//chart
 var getChart = (temp, date)=>{
     var myChart = new Chart(ctx, {
         type: 'line',
@@ -137,6 +154,9 @@ var getChart = (temp, date)=>{
     });
     }
 
+
+
+//meteo
 var currentMeteo = (parameters) =>{
   var url =  `https://api.openweathermap.org/data/2.5/forecast?q=${parameters}&units=metric&lang=fr&appid=9d785e4be242978d5c675be91bd50019` 
 //icons : //   var urlImg= 'http://openweathermap.org/img/wn/10d@2x.png'
@@ -186,8 +206,6 @@ var currentMeteo = (parameters) =>{
             getMap(coordinates)
             getChart(forecast, daysChart)
 
-
-
             if(getTemper<=-15)
             {document.body.style.background='#bad6d0'}
             else if (getTemper<0 && getTemper>-15)
@@ -205,6 +223,7 @@ var currentMeteo = (parameters) =>{
 
 
 
+// Event Manager
 
 //event autocomplétion
 searchBar.addEventListener('keyup', (event)=>{
@@ -215,7 +234,6 @@ searchBar.addEventListener('keyup', (event)=>{
     else{  getDataCompletion(searchBar.value);
         currentMeteo()}
 })
-
 
 
 //event réinitialisation barre de recherche et dissimulation de la liste

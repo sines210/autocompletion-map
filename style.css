@@ -69,9 +69,18 @@ width: 40vw;}
 
 
 
+/* clock */
+
+#clockContain
+{display: flex;
+flex-direction: row;
+font-size: 2rem;
+list-style: none;}
+
+
+
+
 /* LISTE */
-
-
 
 
 .tryClik

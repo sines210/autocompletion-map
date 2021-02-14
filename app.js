@@ -20,17 +20,35 @@ closeMap.style.display='none'
 
 
 //Set a clock
-var newDat = new Date();
-var clock ='';
-var setClock = (param) =>{
-   var a=  newDat.getHours();
-   var b = newDat.getMinutes();
-   var c = `${a}:${b}`;
-   clock = c
-}
-  setClock()
-clockDiv.insertAdjacentHTML('afterbegin', `<li id=clockIcon>&#128336;</li><li>${clock}</li>`)
+// var newDat = new Date();
+// var clock ='';
+// var setClock = (param) =>{
+ 
+//    var a=  newDat.getHours();
+//    var b = newDat.getMinutes();
 
+// //   if(!b[1]&&!b[2])
+// //   {b = '0' + b}
+//    var c = `${a}:${b}`;
+//    clock = c
+// }
+//   setClock()
+
+// clockDiv.insertAdjacentHTML('afterbegin', `<li id=clockIcon>&#128336;</li><li>${clock}</li>`)
+var updateTime= () => {
+    var currentTime = new Date()
+    var a = currentTime.getHours()
+    var b = currentTime.getMinutes()
+    if (b < 10){
+       b = "0" + minutes
+    }
+    var c = `${a}:${b}`;
+  
+    clockDiv.innerHTML = "&#128336;"+c;
+
+// clockDiv.insertAdjacentHTML('afterbegin', `<li id=clockIcon>&#128336;</li><li>${clock}</li>`)
+}
+setInterval(updateTime, 1000);
 
 //data completion
 var getDataCompletion = (parameters) => {

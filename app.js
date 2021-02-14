@@ -19,24 +19,7 @@ closeMap.style.display='none'
 
 
 
-//Set a clock
-// var newDat = new Date();
-// var clock ='';
-// var setClock = (param) =>{
- 
-//    var a=  newDat.getHours();
-//    var b = newDat.getMinutes();
-
-// //   if(!b[1]&&!b[2])
-// //   {b = '0' + b}
-//    var c = `${a}:${b}`;
-//    clock = c
-// }
-//   setClock()
-
-// clockDiv.insertAdjacentHTML('afterbegin', `<li id=clockIcon>&#128336;</li><li>${clock}</li>`)
-
-
+//clock
 function updateTime(parameters){
     var currentTime = new Date()
     var a = currentTime.getHours()
